@@ -11,15 +11,19 @@ export class PlantaListaComponent implements OnInit {
 
   constructor(private plantaService: PlantaService) { }
   plantas: Array<Planta> = [];
+  plantasExt: number = 0;
+  plantasInt: number = 0;
 
   getPlantas() {
     this.plantaService.getPlantas().subscribe(plantas => {
       this.plantas = plantas;
+      this.plantasInt = plantas.filter(planta => planta.tipo =="Interior").length
+      this.plantasExt = plantas.filter(planta => planta.tipo =="Exterior").length
     });
   }
 
   ngOnInit() {
-    this.getPlantas();
+    this.getPlantas()
   }
 
 }
